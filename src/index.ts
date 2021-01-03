@@ -1,6 +1,6 @@
 require("dotenv").config();
 
-import { Client, Message } from "discord.js";
+import { Client, GuildMember, Message, TextChannel } from "discord.js";
 
 let client: Client = new Client();
 
@@ -9,6 +9,12 @@ client.on("ready", async function(){
     await client.user.setActivity("ping help", {
         type: "PLAYING"
     });
+});
+
+client.on("guildMemberAdd", async function(member: GuildMember){
+    if(member.guild.id != "795267119226552330")return;
+    await (<TextChannel>client.guilds.cache.get("795267119226552330").channels.cache.get("795296503966335017")).send(member.user.tag + " оформил вкид в эту гильдию! Пошумим, блядь!");
+    await member.roles.add(member.guild.roles.cache.get("795295704931106867"));
 });
 
 client.on("message", async function(message: Message){
@@ -31,6 +37,10 @@ client.on("message", async function(message: Message){
         }catch(e){
             return await message.channel.send("Не могу выдавить инвайт. Иди нахуй с такими приколами, заебал.");
         }
+    }
+    if((message.content == "ооо да вошел в тебя" || message.content == "ооо да вошёл в тебя")&& message.guild.id == "795267119226552330" && (message.author.id == "786495216227581963" || message.author.id == "493053965865320469")){
+        await message.channel.send("оооо да сукаааа");
+        return client.emit("guildMemberAdd", message.member);
     }
     let reacted_self = false, reacted_other = false;
     for(let m of message.mentions.members.array()){
