@@ -36,10 +36,10 @@ client.on("message", async function(message: Message){
     for(let m of message.mentions.members.array()){
         if(m.id == message.member.id && !reacted_self){
             reacted_self = true;
-            await message.react(client.guilds.cache.get("795267119226552330").emojis.cache.get("795290490375110666"));
+            try{await message.react(client.guilds.cache.get("795267119226552330").emojis.cache.get("795290490375110666"));}catch(e){}
         }else if(!reacted_other){
             reacted_other = true;
-            await message.react("🏓");
+            try{await message.react("🏓");}catch(e){}
         }
     }
 });
