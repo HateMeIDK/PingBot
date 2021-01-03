@@ -32,6 +32,11 @@ client.on("message", async function(message: Message){
             return await message.channel.send("Не могу выдавить инвайт. Иди нахуй с такими приколами, заебал.");
         }
     }
+    if(message.mentions.members.size > 0){
+        try {
+            await message.react("🏓");
+        }catch(e){}
+    }
 });
 
 client.login(process.env.TOKEN);
