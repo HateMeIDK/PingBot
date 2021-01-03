@@ -1,6 +1,6 @@
 {
   "name": "pingbot",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Best discord bot. Ever.",
   "main": "./dist/index.js",
   "scripts": {
